@@ -14,7 +14,16 @@ module.exports = {
       },
       backgroundColor : () => ({
         'overlay' : 'rgba(38, 70, 83, .45)'
-      })
+      }),
+      keyframes : {
+        scaleUp : {
+          '0%' : {transform : 'scale(0.5)'},
+          '100%' : {transform : 'scale(1)'}
+        }
+      },
+      animation : {
+        scaleUp : 'scaleUp .3s ease'
+      }
     },
   },
   variants: {
