@@ -66,28 +66,41 @@ export default {
     }
 
     function checkWinner() {
-      let playerWin = WIN_COMBINATION.some(combination => {
-        return combination.every(index => {
-          return board.value[index] === player
-        })
-      })
+      let win = false
+      let winner = ""
 
-      let computerWin = WIN_COMBINATION.some(combination => {
-        return combination.every(index => {
-          return board.value[index] === computer
-        })
-      })
-     
-      let tie = board.value.every(cell => {
-        return cell !== null
-      })
+      for (let i = 0; i <= 7; i++) {
+        const winCondition = WIN_COMBINATION[i]
 
-      if(playerWin) return player
-      else if(computerWin) return computer
-      else if(tie) return "tie"
-      
-      return null
+        let cell1 = board.value[winCondition[0]]
+        let cell2 = board.value[winCondition[1]]
+        let cell3 = board.value[winCondition[2]]
+
+        if(cell1 === null || cell2 === null || cell3 === null) {
+          continue
+        }
+
+        if(cell1 === cell2 && cell2 === cell3) {
+          win = true
+          winner = cell1
+          break
+        }
         
+      }
+
+      if(win && winner === computer) {
+        return computer
+      }else if(win && winner === player) {
+        return player
+      }
+
+      let draw = !board.value.includes(null)
+
+      if(draw) {
+        return "tie"
+      }
+
+      return null
     }
 
     function computerTurn() {
@@ -106,8 +119,6 @@ export default {
           }
         }
       }
-
-      console.log("Finish Turn")
       
       board.value[move] = computer
       currentTurn.value = player
