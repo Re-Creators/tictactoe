@@ -15,24 +15,152 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 export default {
   setup() {
+
+    const SCORES = {
+      x : -10,
+      o: 10,
+      tie: 0
+    }
+    const WIN_COMBINATION = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6]
+    ]
+
     const board = ref([null, null, null, null, null, null, null, null,null, null])
-    const turn = ref('x')
+    const player = 'x'
+    const computer = 'o'
+    const isGameOver = ref(false)
+    let computerDelay
+    const currentTurn = ref(player)
+
+
+    watch(currentTurn, () => {
+      let winner = checkWinner() 
+      if(winner !== null) {
+        console.log(winner)
+        gameOver.value = true
+        gameOver()
+      }
+    })
 
     function setMark(index){
-      if(board.value[index] === null) {
-         board.value[index] = turn.value
+      if(board.value[index] === null && !isGameOver.value && currentTurn.value === player) {
+          board.value[index] = player
+          currentTurn.value = computer
 
-        // Change Turn
-        turn.value = (turn.value === 'x') ? 'o' : 'x'
+          // Computer turn
+          computerDelay = setTimeout(() => {
+            computerTurn()
+          }, 700)
+          
       }
     }
 
+    function checkWinner() {
+      let playerWin = WIN_COMBINATION.some(combination => {
+        return combination.every(index => {
+          return board.value[index] === player
+        })
+      })
+
+      let computerWin = WIN_COMBINATION.some(combination => {
+        return combination.every(index => {
+          return board.value[index] === computer
+        })
+      })
+     
+      let tie = board.value.every(cell => {
+        return cell !== null
+      })
+
+      if(playerWin) return player
+      else if(computerWin) return computer
+      else if(tie) return "tie"
+      
+      return null
+        
+    }
+
+    function computerTurn() {
+      let bestScore = -Infinity
+      let move
+
+      for (let index = 0; index < board.value.length; index++) {
+        if(board.value[index] === null) {
+          board.value[index] = computer
+          let score = minimax(board.value, 0, false)
+          board.value[index] = null
+
+          if(score > bestScore) {
+            bestScore = score
+            move = index
+          }
+        }
+      }
+
+      console.log("Finish Turn")
+      
+      board.value[move] = computer
+      currentTurn.value = player
+    }
+
+
+    function minimax(board, depth, isMaximazing) {
+      let result = checkWinner()
+      if(result !== null){
+        return SCORES[result]
+      }
+
+      if(isMaximazing) {
+        let bestScore = -Infinity
+        for (let i = 0; i < board.length; i++) {
+          if(board[i] === null) {
+            board[i] = computer
+            let score = minimax(board, depth + 1, false)
+            board[i] = null
+            bestScore = Math.max(score, bestScore)
+          }
+        }
+
+        return bestScore
+      }else{
+        let bestScore = Infinity
+        for (let i = 0; i < board.length; i++) {
+          if(board[i] === null) {
+            board[i] = player
+            let score = minimax(board, depth + 1, true)
+            board[i] = null
+            bestScore = Math.min(score, bestScore)
+          }
+        }
+
+        return bestScore
+      }
+    }
+
+
+    function gameOver() {
+        clearTimeout(computerDelay)
+        setTimeout(() => {
+          currentTurn.value = player
+          isGameOver.value = false
+          board.value = [null, null, null, null, null, null, null, null,null, null]
+        }, 1000)
+    }
+    
     return {
       setMark,
-      board
+      board,
+      currentTurn
     }
   }
 }
