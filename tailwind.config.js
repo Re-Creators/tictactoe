@@ -11,6 +11,8 @@ module.exports = {
         'secondary' : '#2A9D8F',
         'burnt-sienna' : '#E76F51',
         'rob-roy' : '#E9C46A',
+        'btn-hover' : '#E35835',
+        'btn-click' : '#E0461F'
       },
       backgroundColor : () => ({
         'overlay' : 'rgba(38, 70, 83, .45)'
@@ -28,6 +30,7 @@ module.exports = {
   },
   variants: {
     extend: {
+      backgroundColor: ['active'],
     },
   },
   plugins: [],
