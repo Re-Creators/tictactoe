@@ -23,10 +23,11 @@
 import { ref, watch } from 'vue'
 import WinPopup from './WinPopup.vue'
 export default {
+  emits: ['update-score'],
   components :{
     WinPopup
   },
-  setup() {
+  setup(props, { emit }) {
     const WIN_COMBINATION = [
         [0,1,2],
         [3,4,5],
@@ -159,6 +160,12 @@ export default {
     }
 
     function playAgain() {
+        //Check who is win
+        if (winner.value === player) emit('update-score', "player") 
+        else if (winner.value === computer) emit('update-score', "computer") 
+        else emit('update-score', "tie") 
+
+        winner.value = null
         currentTurn.value = player
         isGameOver.value = false
         board.value = [null, null, null, null, null, null, null, null,null]

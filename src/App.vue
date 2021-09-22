@@ -4,19 +4,19 @@
       <button>INVITE PEOPLE</button>
       <button>CHANGE</button>
     </div>
-    <Board/>
+    <Board @update-score="updateScore"/>
     <div class="grid grid-cols-3 text-rob-roy text-2xl gap-8">
       <div class="text-center">
         <div class="font-semibold">PLAYER (X)</div>
-        <div class="font-bold">12</div>
+        <div class="font-bold">{{ score.player }}</div>
       </div>
       <div class="text-center">
         <div class="font-semibold">TIE</div>
-        <div class="font-bold">0</div>
+        <div class="font-bold">{{ score.tie }}</div>
       </div>
       <div class="text-center">
         <div class="font-semibold">COMPUTER (O)</div>
-        <div class="font-bold">17</div>
+        <div class="font-bold">{{ score.computer }}</div>
       </div>
     </div>
   </div>
@@ -28,6 +28,20 @@ export default {
   name: 'App',
   components: {
     Board,
+  },
+  data() {
+    return {
+      score : {
+        player : 0,
+        computer : 0,
+        tie : 0
+      }
+    }
+  },
+  methods: {
+    updateScore(winner) {
+      this.score[winner]++
+    }
   }
 }
 </script>
