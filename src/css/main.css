@@ -6,6 +6,7 @@ body {
     font-family: 'Permanent Marker', cursive;
 }
 
+/* Transition */
 .popup-enter-active,
 .popup-leave-active {
   transition: all 0.3s ease-out;
@@ -15,6 +16,18 @@ body {
 .popup-leave-to {
   transform: scale(.5);
   opacity: 0;
+}
+
+.slideup-enter-active,
+.slideup-leave-active {
+  transition: all .7s ease-out;
+}
+
+.slideup-enter-from,
+.slideup-leave-to {
+  opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
 }
 
 /* Remove Spesific borders */

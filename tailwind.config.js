@@ -15,7 +15,7 @@ module.exports = {
         'btn-click' : '#E0461F'
       },
       backgroundColor : () => ({
-        'overlay' : 'rgba(38, 70, 83, .45)'
+        'overlay' : 'rgba(38, 70, 83, .45)',
       }),
       keyframes : {
         scaleUp : {
