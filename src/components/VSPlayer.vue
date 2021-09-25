@@ -5,13 +5,13 @@
       </transition>
 
       <transition name="notif">
-        <div class="fixed top-10 right-20  bg-secondary px-10 py-5 text-rob-roy rounded-xl text-lg" v-if="showNotif">
+        <div class="fixed top-10 right-20 bg-secondary px-10 py-5 text-rob-roy rounded-xl text-lg" v-if="showNotif">
             {{ notifMessage }}
         </div>
       </transition>
     </div>
-    <div class="w-96 board grid grid-cols-3">
-      <div class="cell flex items-center justify-center text-burnt-sienna border-8 border-secondary w-32 h-32 cursor-pointer" v-for="index in 9" :key="index" @click="setMark(index-1)">
+    <div class="w-11/12 md:w-96 board grid grid-cols-3 px-3 sm:px-5 md:px-0">
+      <div class="cell flex items-center justify-center text-burnt-sienna border-8 border-secondary w-full h-28 sm:h-32 md:w-32 md:h-32 p-3 md:p-0 cursor-pointer" v-for="index in 9" :key="index" @click="setMark(index-1)">
         <!-- X -->
         <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none" v-if="board[index - 1] === 'x'" class="animate-scaleUp">
           <rect y="16.6667" width="23.5702" height="117.851" transform="rotate(-45 0 16.6667)" fill="#E76F51"/>
@@ -190,17 +190,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.popup-enter-active,
-.popup-leave-active {
-  transition: all 0.3s ease-out;
-}
-
-.popup-enter-from,
-.popup-leave-to {
-  transform: scale(.5);
-  opacity: 0;
-}
-
 .notif-enter-active,
 .notif-leave-active {
   transition: all 0.3s ease-out;

@@ -1,8 +1,8 @@
 <template>
-    <div class="bg-secondary w-2/6 p-10 rounded-lg flex flex-col items-center">
-        <div class="img-mode">
+    <div class="bg-secondary w-4/5 md:w-1/2 lg:w-2/6 p-10 rounded-lg flex flex-col items-center">
+        <div class="w-4/5 md:w-full h-48 relative">
             <transition name="fade" mode="out-in">
-                <svg width="345" height="269" viewBox="0 0 345 269" fill="none" xmlns="http://www.w3.org/2000/svg" v-if="picked === 'computer'">
+                <svg width="100%" height="100%" viewBox="0 0 345 269" fill="none" xmlns="http://www.w3.org/2000/svg" v-if="picked === 'computer'">
                     <path d="M270.73 100.064C256.22 42.9401 206.085 1.70427 147.238 0.0503383C116.127 -0.824053 83.3893 9.50667 59.5541 45.6576C16.946 110.281 62.1724 154.938 93.7031 176.158C108.936 186.431 122.662 198.783 134.483 212.856C155.781 238.161 196.754 269.605 245.55 220.337C280.917 184.627 280.394 138.115 270.73 100.064Z" fill="#E76F51"/>
                     <path opacity="0.4" d="M329.333 108.256C332.455 108.256 334.986 105.215 334.986 101.464C334.986 97.713 332.455 94.6721 329.333 94.6721C326.211 94.6721 323.68 97.713 323.68 101.464C323.68 105.215 326.211 108.256 329.333 108.256Z" fill="white"/>
                     <path opacity="0.4" d="M15.6671 104.052C18.7892 104.052 21.3202 101.011 21.3202 97.2595C21.3202 93.5084 18.7892 90.4675 15.6671 90.4675C12.545 90.4675 10.014 93.5084 10.014 97.2595C10.014 101.011 12.545 104.052 15.6671 104.052Z" fill="white"/>
@@ -23,7 +23,7 @@
                     <path opacity="0.1" d="M219.278 226.414V228.913H84.9944V226.914L85.1792 226.414H219.278Z" fill="black"/>
                     <path opacity="0.4" d="M291.538 54.567C294.66 54.567 297.191 51.5261 297.191 47.775C297.191 44.0239 294.66 40.983 291.538 40.983C288.416 40.983 285.885 44.0239 285.885 47.775C285.885 51.5261 288.416 54.567 291.538 54.567Z" fill="white"/>
                 </svg>
-                <svg width="345" height="270" viewBox="0 0 345 270" fill="none" xmlns="http://www.w3.org/2000/svg" v-else>
+                <svg width="100%" height="100%" viewBox="0 0 345 270" fill="none" xmlns="http://www.w3.org/2000/svg" v-else>
                     <path d="M296.186 112.735C300.941 118.441 306.247 119.352 312.102 115.467C309.645 110.962 309.06 106.061 309.715 100.899H298.308C298.813 105.435 298.677 109.659 296.186 112.735Z" fill="#FFB8B8"/>
                     <path d="M315.02 262.053L321.121 258.412L323.774 219.868V199.534L309.714 199.231L313.693 219.565L315.02 262.053Z" fill="#FFB8B8"/>
                     <path d="M297.334 262.053L291.233 258.412L288.581 219.868V199.534L302.64 199.231L298.661 219.565L297.334 262.053Z" fill="#FFB8B8"/>
@@ -100,8 +100,8 @@
                 </svg>
             </transition>
         </div>
-        <div class="text-3xl text-rob-roy font-bold">
-            <label class="container mt-10">VS Computer
+        <div class="text-xl md:text-3xl text-rob-roy font-bold">
+            <label class="container md:mt-10">VS Computer
                 <input type="radio" value="computer" checked="checked"  v-model="picked">
                 <span class="checkmark"></span>
             </label>
@@ -110,7 +110,7 @@
                 <span class="checkmark"></span>
             </label>
         </div>
-        <button @click="play" class="mt-10 px-20 py-5 bg-burnt-sienna hover:bg-btn-hover active:bg-btn-click text-white rounded-xl">PLAY</button>
+        <button @click="play" class="mt-10 px-20 py-3 md:py-5 bg-burnt-sienna hover:bg-btn-hover active:bg-btn-click text-white rounded-xl">PLAY</button>
     </div>
 </template>
 <script>
@@ -129,6 +129,7 @@ export default {
             }else{
                this.$router.push({name:'Computer'})
             }
+            this.$emit('dismiss-modal')
         }
     }
 }

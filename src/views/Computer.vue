@@ -1,16 +1,19 @@
 <template>
-  <div class="w-full h-screen flex flex-col items-center justify-between py-14 bg-primary">
+  <div class="w-full h-screen flex flex-col items-center justify-between py-14 bg-primary" >
+    
     <teleport to="body">
-      <div class="absolute inset-0 flex items-center justify-center bg-overlay" v-if="showModal">
-        <mode-popup/>
-      </div>
+      <transition name="popup">
+        <div class="absolute inset-0 flex items-center justify-center bg-overlay" @click="showModal = false" v-if="showModal">
+          <mode-popup @click.stop @dismiss-modal="dismissModal"/>
+        </div>
+      </transition>
     </teleport>
-    <div class="w-4/5 flex justify-between text-rob-roy text-2xl font-bold">
+    <div class="w-4/5 flex justify-between text-rob-roy text-base md:text-2xl font-bold">
       <button></button>
       <button @click="showModal = true">CHANGE</button>
     </div>
     <VSComputer @update-score="updateScore"/>
-    <div class="grid grid-cols-3 text-rob-roy text-2xl gap-8">
+    <div class="grid grid-cols-3 text-rob-roy text-base md:text-2xl gap-8 px-5 md:px-0">
       <div class="text-center">
         <div class="font-semibold">PLAYER (X)</div>
         <div class="font-bold">{{ score.player }}</div>
@@ -51,6 +54,9 @@ export default {
   methods: {
     updateScore(winner) {
       this.score[winner]++
+    },
+    dismissModal() {
+      this.showModal = false
     }
   },
   

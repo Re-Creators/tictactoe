@@ -6,6 +6,17 @@ body {
     font-family: 'Permanent Marker', cursive;
 }
 
+.popup-enter-active,
+.popup-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.popup-enter-from,
+.popup-leave-to {
+  transform: scale(.5);
+  opacity: 0;
+}
+
 /* Remove Spesific borders */
 .cell:first-child,
 .cell:nth-child(2),
