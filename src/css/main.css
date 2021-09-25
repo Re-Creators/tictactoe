@@ -2,6 +2,10 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+body {
+    font-family: 'Permanent Marker', cursive;
+}
+
 /* Remove Spesific borders */
 .cell:first-child,
 .cell:nth-child(2),

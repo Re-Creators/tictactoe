@@ -1,16 +1,11 @@
 <template>
-    <div>
-        <button @click="play">PLAY</button>
+    <div class="w-full h-screen flex justify-center items-center">
+      <mode-popup/>
     </div>
 </template>
 <script>
-import {v4 as uuidV4} from 'uuid'
-
+import ModePopup from '../components/ModePopup.vue'
 export default {
-    methods : {
-        play() {
-            this.$router.push({name:'PlayerRoom', params:{roomId: uuidV4()}})
-        }
-    }
+  components: { ModePopup },
 }
 </script>
