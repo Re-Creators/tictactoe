@@ -114,7 +114,7 @@
     </div>
 </template>
 <script>
-import {v4 as uuidV4} from 'uuid'
+import axios from 'axios'
 
 export default {
     data() {
@@ -123,9 +123,15 @@ export default {
         }
     },
     methods : {
-        play() {
+        async play() {
             if(this.picked === 'player') {
-                this.$router.push({name:'PlayerRoom', params:{roomId: uuidV4()}})
+              try{
+                const { data } = await axios.get('http://localhost:3030/new-room')
+                this.$router.push({name:'PlayerRoom', params:{roomId: data.roomId}})
+
+              }catch(err) {
+                console.log(err)
+              }
             }else{
                this.$router.push({name:'Computer'})
             }

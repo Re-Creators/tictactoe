@@ -28,8 +28,10 @@
 <script>
 import {v4 as uuidV4} from 'uuid'
 
+import { ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import { io } from "socket.io-client"
-import {ref, watch} from 'vue'
+
 import WinPopup from './WinPopup.vue'
 
 export default {
@@ -49,6 +51,8 @@ export default {
         [0,4,8],
         [2,4,6]
     ]
+
+    const router = useRouter()
     const playerId = uuidV4()
     const socket = io('http://localhost:3030')
     const isGameOver = ref(false)
@@ -114,6 +118,11 @@ export default {
       canPlay.value = true
     })
 
+    // Invalid room
+    socket.on('invalid-room', () => {
+      router.push({name : 'Game'})
+    })
+
     function displayMessageNofication(msg) {
       notifMessage.value = msg
       showNotif.value = true
@@ -130,7 +139,6 @@ export default {
         socket.emit('player-click', props.roomId, coor)
       }
     }
-
 
     function checkWinner(board) {
       let win = false
