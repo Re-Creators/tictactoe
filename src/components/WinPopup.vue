@@ -1,9 +1,9 @@
 <template>
-    <div class="w-4/5 md:w-2/5 bg-secondary pt-5 flex flex-col items-center justify-between relative text-white rounded-xl">
-        <div class="w-full h-32 md:mb-10">
-            <img src="@/assets/winners.svg" alt="" class="w-4/5 md:w-1/2 mx-auto">
+    <div class="w-4/5 md:w-1/2 lg:w-2/5 bg-secondary pt-5 flex flex-col items-center justify-between relative text-white rounded-xl">
+        <div class="w-4/5 md:w-full h-48">
+            <img src="@/assets/winners.svg" alt="" class="w-full h-full">
         </div>
-        <div class="text-4xl md:text-5xl font-bold text-center md:my-8">
+        <div class="text-4xl md:text-5xl font-bold text-center mb-10 md:my-8">
             <h1 class="capitalize">{{ winner }}</h1>
             <h1 class="mt-3" v-if="winner !== 'tie'">Win</h1>
         </div>
