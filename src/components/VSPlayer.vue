@@ -36,7 +36,7 @@ import WinPopup from './WinPopup.vue'
 
 export default {
   props : ['roomId'],
-  emits: ['update-score', 'set-mark-indicator'],
+  emits: ['update-score', 'set-mark-indicator', 'reset-score'],
   components :{
     WinPopup
   },
@@ -54,7 +54,7 @@ export default {
 
     const router = useRouter()
     const playerId = uuidV4()
-    const socket = io('http://localhost:3030')
+    const socket = io('https://tictactoe-io.herokuapp.com/')
     const isGameOver = ref(false)
     const board = ref([null, null, null, null, null, null, null, null,null])
 

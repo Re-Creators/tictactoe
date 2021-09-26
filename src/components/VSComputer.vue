@@ -1,8 +1,13 @@
 <template>
-    <transition name="popup">
-      <win-popup v-if="isGameOver" v-on:play-again="playAgain" :winner="winner"/>
-    </transition>
     <div class="w-full md:w-96 board grid grid-cols-3 px-3 sm:px-5 md:px-0">
+      <!-- Result Modal -->
+      <teleport to="body">
+        <transition name="popup">
+          <div class="absolute inset-0 flex items-center justify-center bg-overlay" v-if="isGameOver">
+            <win-popup v-if="isGameOver" v-on:play-again="playAgain" :winner="winner"/>
+          </div>
+        </transition>
+      </teleport>
       <div class="cell flex items-center justify-center text-burnt-sienna border-8 border-secondary w-full h-28 sm:h-32 md:w-32 md:h-32 p-3 md:p-0 cursor-pointer" v-for="index in 9" :key="index" @click="setMark(index - 1)">
         <!-- X -->
         <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none" v-if="board[index - 1] === 'x'" class="animate-scaleUp">
@@ -21,6 +26,7 @@
 
 import { ref, watch } from 'vue'
 import WinPopup from './WinPopup.vue'
+
 export default {
   emits: ['update-score'],
   components :{

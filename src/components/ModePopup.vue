@@ -126,7 +126,7 @@ export default {
         async play() {
             if(this.picked === 'player') {
               try{
-                const { data } = await axios.get('http://localhost:3030/new-room')
+                const { data } = await axios.get('https://tictactoe-io.herokuapp.com/new-room')
                 this.$router.push({name:'PlayerRoom', params:{roomId: data.roomId}})
 
               }catch(err) {
