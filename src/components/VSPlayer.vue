@@ -78,7 +78,6 @@ export default {
     socket.emit('join-room', props.roomId, playerId)
     
     socket.on('player-connected', (id) => {
-      console.log("Player joined game")
       // Show notification only for who created the room
       if(id !== playerId) {
         // set first player mark
@@ -88,7 +87,7 @@ export default {
         // second player mark
         myMark.value = "o"
       }
-      console.log("player joined")
+      emit('reset-score')
       emit('set-mark-indicator', myMark.value)
       canPlay.value = true
 

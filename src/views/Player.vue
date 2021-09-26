@@ -20,7 +20,14 @@
       <button @click="shareModal = true">INVITE PEOPLE</button>
       <button @click="showModal = true">CHANGE</button>
     </div>
-    <VSPlayer @update-score="updateScore" @set-mark-indicator="setMarkIndicator" :roomId="roomId" />
+    <!-- Board -->
+    <VSPlayer 
+        @update-score="updateScore" 
+        @set-mark-indicator="setMarkIndicator"
+        @reset-score="resetScore" 
+        :roomId="roomId" 
+    />
+    
     <div class="grid grid-cols-3 text-rob-roy md:text-2xl px-5 md:px-0 gap-8">
       <div class="text-center">
         <div class="font-semibold h-14 md:h-auto" :class="[myMark === 'x' ? 'text-burnt-sienna' : '']">PLAYER 1 (X)</div>
@@ -71,6 +78,13 @@ export default {
     },
     dismissModal() {
       this.showModal = false
+    },
+    resetScore() {
+      this.score = {
+        x : 0,
+        o : 0,
+        tie : 0
+      }
     }
   },
   computed : {

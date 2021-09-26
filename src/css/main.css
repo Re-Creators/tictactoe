@@ -2,6 +2,11 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+
 body {
     font-family: 'Permanent Marker', cursive;
 }
